@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block title %}Download Ready - {{ title }}{%
+endblock %} {% block content %}
+<div class="container center">
+	<h3>✅ Download Ready</h3>
+	<div class="file-info">
+		<strong>File:</strong> {{ filename }}<br />
+		<strong>Size:</strong> {{ file_size }} KB<br />
+		<strong>Format:</strong> {{ format_display }}
+	</div>
+	<div>
+		<a href="/download_file/{{ video_id }}" class="download-btn"
+			>📥 Download (PSP Compatible)</a
+		>
+	</div>
+	<div style="margin: 20px 0">
+		<a href="/" class="secondary-btn">Search More</a>
+	</div>
+	<div class="muted small">
+		File will be saved to your PSP's Music folder. Files auto-delete after 10
+		Minutes from server.
+	</div>
+</div>
+{% endblock %}

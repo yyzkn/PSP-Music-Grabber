@@ -1,0 +1,5 @@
+{
+	"port": 2001,
+	"ffmpeg_location": "your/ffmpeg/path",
+	"cache_dir": "./audio_cache"
+}

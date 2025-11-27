@@ -1,0 +1,152 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 20px;
+	background: #ffffff;
+	color: #333;
+}
+.page-wrapper {
+	display: flex;
+	justify-content: center;
+}
+.container {
+	background: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	max-width: 450px;
+	width: 100%;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+.center {
+	text-align: center;
+}
+h2,
+h3 {
+	margin-top: 0;
+	color: #333;
+}
+.muted {
+	color: #666;
+}
+.small {
+	font-size: 12px;
+}
+.search-form {
+	display: flex;
+	gap: 8px;
+	justify-content: center;
+	align-items: center;
+}
+.search-form input[type="text"] {
+	width: 250px;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+.search-form button {
+	padding: 10px 16px;
+	background: #007cba;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.info-box {
+	background: #e7f3ff;
+	padding: 10px;
+	border-radius: 6px;
+	margin-top: 10px;
+	font-size: 13px;
+	color: #555;
+	justify-content: left;
+	text-align: left;
+}
+.info-box .features {
+	margin-top: 6px;
+	margin-bottom: 0;
+	padding-left: 18px;
+}
+.info-box .features li {
+	margin-bottom: 6px;
+}
+.info-box .feature-desc {
+	margin-top: 2px;
+	color: #555;
+	font-size: 12px;
+}
+.song-item {
+	margin: 12px 0;
+	padding: 12px;
+	background: #f8f8f8;
+	border-radius: 4px;
+	border-left: 3px solid #007cba;
+}
+.song-title {
+	font-weight: 700;
+}
+.song-artist {
+	color: #666;
+	font-size: 12px;
+	margin-top: 6px;
+}
+.song-buttons {
+	margin-top: 10px;
+	display: flex;
+	gap: 8px;
+}
+.btn {
+	padding: 6px 12px;
+	border-radius: 4px;
+	color: #fff;
+	text-decoration: none;
+	font-size: 12px;
+}
+.btn-play {
+	background: #007cba;
+}
+.btn-download {
+	background: #28a745;
+}
+.back-link {
+	display: block;
+	margin-top: 20px;
+	text-align: center;
+	color: #007cba;
+	text-decoration: none;
+}
+.controls .control-link {
+	display: block;
+	width: 250px;
+	margin: 10px auto;
+	padding: 10px 0;
+	background: #007cba;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 4px;
+}
+.file-info {
+	background: #f8f9fa;
+	padding: 10px;
+	border-radius: 4px;
+	margin: 15px 0;
+	font-size: 14px;
+}
+.download-btn {
+	display: inline-block;
+	padding: 12px 24px;
+	background: #28a745;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 6px;
+}
+.secondary-btn {
+	display: inline-block;
+	margin: 5px;
+	padding: 8px 16px;
+	background: #6c757d;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 4px;
+}
+.loading {
+	margin: 20px 0;
+}

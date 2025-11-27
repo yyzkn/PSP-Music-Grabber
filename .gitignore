@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+
+
+# Cache and temp
+*.log
+*.tmp
+*.bak
+.cache/
+audio_cache/
+bin/
+include/
+lib/
+lib64/
+share/
+
+# Environment/config
+config.json
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Misc
+*.orig
+
+# Systemd logs
+*.service.log
+
+# Private files
+pyvenv.cfg
+.prettierrc

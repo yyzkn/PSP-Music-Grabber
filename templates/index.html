@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% block title %}PSP Music Grabber{% endblock %} {%
+block content %}
+<div class="container center" style="padding-top: 8px">
+	<!-- PSP browsers have limited CSS support; use inline styles and H1 for larger text -->
+	<h1 style="font-size: 28px; margin: 0; padding-top: 4px">
+		🎵 PSP Music Grabber
+	</h1>
+	<noscript><big>PSP Music Grabber</big></noscript>
+	<p class="muted">Search and download music from YouTube API</p>
+	<form action="/search" method="get" class="search-form">
+		<input
+			type="text"
+			name="q"
+			placeholder="Search for songs, artists..."
+			required
+		/>
+		<button type="submit">Search Music</button>
+	</form>
+	<div class="info-box">
+		<strong>📋 Features:</strong>
+		<ul class="features">
+			<li>
+				<strong>Play in Browser</strong>
+				<div class="feature-desc">
+					Stream Music from YouTube (modern browsers)
+				</div>
+			</li>
+			<li>
+				<strong>Download for PSP</strong>
+				<div class="feature-desc">MP3 with metadata (PSP compatible)</div>
+			</li>
+		</ul>
+	</div>
+</div>
+{% endblock %}

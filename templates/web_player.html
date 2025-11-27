@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block title %}{{ title }} - Web Player{% endblock
+%} {% block content %}
+<div class="container center">
+	<h3>🎵 Web Player</h3>
+	<div class="now-playing">
+		<strong>{{ title }}</strong><br /><span class="muted">{{ artists }}</span>
+	</div>
+	<div class="controls">
+		<audio
+			controls
+			autoplay
+			style="width: 100%; max-width: 350px; height: 50px"
+		>
+			<source src="{{ audio_url }}" type="audio/mpeg" />
+			PSP browser does not support the audio element, please use the download
+			option.
+		</audio>
+	</div>
+	<div class="controls">
+		<a href="/psp_download/{{ video_id }}" class="control-link"
+			>📥 Download MP3 for PSP</a
+		>
+		<a href="javascript:history.back()" class="control-link">Back</a>
+	</div>
+	<div class="info"><p>Streaming audio - For modern browsers only</p></div>
+</div>
+{% endblock %}

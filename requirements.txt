@@ -1,0 +1,22 @@
+```pip-requirements
+Flask==3.1.2
+yt-dlp==2025.11.12
+ytmusicapi==1.11.1
+mutagen==1.47.0
+Pillow==12.0.0
+requests==2.32.5
+
+# Optional / deployment
+gunicorn==20.1.0
+waitress==2.1.2
+```
+Flask
+yt-dlp
+ytmusicapi
+mutagen
+Pillow
+requests
+
+# Optional / deployment
+gunicorn
+waitress

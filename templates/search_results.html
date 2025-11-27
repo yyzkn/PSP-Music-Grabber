@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% block title %}Results - PSP Music Grabber{%
+endblock %} {% block content %}
+<div class="container">
+	<h2>Results for: "{{ query }}"</h2>
+	{% if not results %}
+	<p>No results found. Try a different search term.</p>
+	{% else %} {% for song in results %}
+	<div class="song-item">
+		<div class="song-title">{{ song.title }}</div>
+		<div class="song-artist">
+			{{ song.artists }}{% if song.duration %} • {{ song.duration }}{% endif
+			%}{% if song.album %} • {{ song.album }}{% endif %}
+		</div>
+		<div class="song-buttons">
+			<a href="/web_player/{{ song.videoId }}" class="btn btn-play"
+				>🎵 Play Online</a
+			>
+			<a href="/psp_download/{{ song.videoId }}" class="btn btn-download"
+				>📥 Download MP3</a
+			>
+		</div>
+	</div>
+	{% endfor %} {% endif %}
+	<a href="/" class="back-link">← Back to Search</a>
+	<div class="info">
+		<p><strong>Play Online</strong> - Stream audio in browser</p>
+		<p><strong>Download MP3</strong> - Download (PSP compatible)</p>
+	</div>
+</div>
+{% endblock %}

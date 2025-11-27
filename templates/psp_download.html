@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% block title %}Downloading - {{ title }}{% endblock
+%} {% block content %}
+<div class="container center">
+	<h3>📥 Downloading Music</h3>
+	<div class="loading">
+		<p><b>{{ title }}</b></p>
+		<p>Processing content on the Server...</p>
+		<p><small>Please wait a moment</small></p>
+	</div>
+</div>
+<meta http-equiv="refresh" content="3;url=/psp_download_final/{{ video_id }}" />
+{% endblock %}
