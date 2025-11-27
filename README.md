@@ -55,7 +55,7 @@ source .venv/bin/activate
 python app.py
 ```
 
-Production (Expert):
+Deploy it! (Expert):
 
 Gunicorn (Linux):
 
