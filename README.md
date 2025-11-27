@@ -93,6 +93,47 @@ WantedBy=multi-user.target
 
 For Windows, use NSSM or a service wrapper to run `waitress-serve` as a service.
 
+## Accessing the page
+
+Once the server is running, open your web browser and go to:
+
+    	http://<server-ip>:<port>/
+
+For example, if running locally with the default config:
+
+    	http://127.0.0.1:2001/
+
+### How to check your server IP address
+
+- **On Linux:**
+
+  - Open a terminal and run:
+    ```bash
+    hostname -I
+    ```
+    or
+    ```bash
+    ip addr show
+    ```
+  - Look for your local network IP (e.g. 192.168.x.x or 10.x.x.x).
+
+- **On Windows:**
+  - Open Command Prompt and run:
+    ```cmd
+    ipconfig
+    ```
+  - Look for the "IPv4 Address" under your active network adapter.
+
+To access from your PSP:
+
+- Connect your PSP to the same Wi-Fi network as your server.
+- Open the PSP web browser.
+- Enter your server's IP address and port (e.g. `http://192.168.1.100:2001/`).
+
+You should see the PSP Music Grabber interface.
+
+notes: if the page still didn't load, make sure to disable LAN-to-LAN isolation from your router setting.
+
 ## Important notes
 
 - `yt-dlp` might warn about missing JavaScript runtime; installing Node.js removes this warning and enables more complete extraction.
