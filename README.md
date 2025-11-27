@@ -16,7 +16,7 @@ PSP Music Grabber is a lightweight web tool to search and download audio from Yo
 ## Requirements
 
 - Python 3.10+
-- ffmpeg (must be in PATH or set via `FFMPEG_LOCATION`)
+- ffmpeg (must be in PATH or set via `ffmpeg_location` in `config.json`)
 - Python packages: see `requirements.txt`
 - Node.js (optional, only to avoid some yt-dlp JS warnings)
 
