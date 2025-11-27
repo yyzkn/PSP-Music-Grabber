@@ -1,10 +1,10 @@
 # PSP Music Grabber
 
-PSP Music Grabber is a lightweight web tool to search and download audio from YouTube (using [ytmusicapi](https://github.com/sigma67/ytmusicapi) + [yt-dlp](https://github.com/yt-dlp/yt-dlp)), write PSP-compatible ID3 metadata, and serve a simple PSP-friendly web UI. tested on my own crappy server and 2001 PSP (JP-Region) Model's.
+PSP Music Grabber is a lightweight web tool to search and download audio from YouTube (using [ytmusicapi](https://github.com/sigma67/ytmusicapi) + [yt-dlp](https://github.com/yt-dlp/yt-dlp)), write PSP-compatible ID3 metadata, and serve a simple PSP-friendly web UI. Tested on my JP-Region 2001 PSP Model's and my very own crappy server.
 
 ## Project goals
 
-- Make it easy for PSP users to obtain MP3 files with compatible ID3 metadata cover art.
+- Make it easy for PSP users to obtain MP3 files with compatible ID3 metadata and cover art.
 - Provide a minimal web interface to search, and download audio from YouTube.
 
 ## Key features
@@ -23,8 +23,8 @@ PSP Music Grabber is a lightweight web tool to search and download audio from Yo
 ## Quick installation
 
 ```bash
-git clone <repo-url> psp-music-grabber
-cd psp-music-grabber
+git clone https://github.com/yyzkn/PSP-Music-Grabber
+cd PSP-Music-Grabber
 python -m venv .venv
 source .venv/bin/activate    # Windows PowerShell: .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
