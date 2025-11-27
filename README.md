@@ -34,7 +34,7 @@ Make sure `ffmpeg` is available (`ffmpeg --version`). If ffmpeg is not in your P
 
 ## Configuration
 
-You can configure the app with environment variables or a `config.json` file placed next to `app.py`. Environment variables override `config.json` values.
+You can configure the app with environment variables or a `config.json` file placed next to `app.py` (if there's no `config.json`, create it). Environment variables override `config.json` values.
 
 Example `config.example.json`:
 
