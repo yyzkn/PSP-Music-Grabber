@@ -4,5 +4,11 @@
 	<h3>Error</h3>
 	<p>{{ message }}</p>
 	<a href="/" class="back-link">← Back to Search</a>
+	{% if video_id %}
+	<br /><br />
+	<form action="/psp_download/{{ video_id }}" method="get">
+		<button type="submit">Retry Download</button>
+	</form>
+	{% endif %}
 </div>
 {% endblock %}

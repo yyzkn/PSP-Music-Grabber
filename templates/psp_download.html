@@ -4,8 +4,28 @@
 	<h3>📥 Downloading Music</h3>
 	<div class="loading">
 		<p><b>{{ title }}</b></p>
-		<p>Processing content on the Server...</p>
-		<p><small>Please wait a moment</small></p>
+		<p>Processing content on the server...</p>
+		<p></p>
+		<p>
+			<small>this may take a few minutes due to yt-dlp SABR limitations</small>
+		</p>
+		<!-- <div
+			style="
+				background: #222;
+				color: #eee;
+				padding: 8px;
+				margin-top: 10px;
+				border-radius: 6px;
+				max-width: 400px;
+				overflow-x: auto;
+				font-size: 0.9em;
+			"
+		>
+			<b>Live Log:</b><br />
+			{% for line in logs %}
+			<div>{{ line }}</div>
+			{% endfor %}
+		</div> -->
 	</div>
 </div>
 <meta http-equiv="refresh" content="3;url=/psp_download_final/{{ video_id }}" />

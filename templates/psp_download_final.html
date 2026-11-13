@@ -8,16 +8,16 @@ endblock %} {% block content %}
 		<strong>Format:</strong> {{ format_display }}
 	</div>
 	<div>
-		<a href="/download_file/{{ video_id }}" class="download-btn"
-			>📥 Download (PSP Compatible)</a
-		>
+		<a href="/download_file/{{ video_id }}?f={{ filename }}" class="download-btn"
+			>Download Music
+		</a>
 	</div>
 	<div style="margin: 20px 0">
 		<a href="/" class="secondary-btn">Search More</a>
 	</div>
 	<div class="muted small">
 		File will be saved to your PSP's Music folder. Files auto-delete after 10
-		Minutes from server.
+		minutes from the server.
 	</div>
 </div>
 {% endblock %}

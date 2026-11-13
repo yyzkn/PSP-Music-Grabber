@@ -49,7 +49,32 @@ DOWNLOAD_IN_PROGRESS = set()
 SONG_CACHE = {}
 SONG_CACHE_TTL = 300
 
-DEFAULT_YDL_EXTRACTOR_ARGS = {"youtube": {"player_client": "default"}}
+def _detect_js_runtimes():
+    """Detect available JavaScript runtimes (Deno, Node) for yt-dlp."""
+    runtimes = {}
+    for deno_path in [
+        shutil.which("deno"),
+        os.path.expanduser("~/.deno/bin/deno"),
+        "/usr/local/bin/deno",
+        "/usr/bin/deno",
+    ]:
+        if deno_path and Path(deno_path).is_file() and os.access(deno_path, os.X_OK):
+            runtimes["deno"] = {"path": str(deno_path)}
+            break
+    for node_path in [
+        shutil.which("node"),
+        "/usr/local/bin/node",
+        "/usr/bin/node",
+        "/usr/bin/nodejs",
+    ]:
+        if node_path and Path(node_path).is_file() and os.access(node_path, os.X_OK):
+            runtimes["node"] = {"path": str(node_path)}
+            break
+    return runtimes
+
+
+DEFAULT_YDL_JS_RUNTIMES = _detect_js_runtimes()
+DEFAULT_YDL_EXTRACTOR_ARGS = {"youtube": {"player_client": ["default"]}}
 
 
 def get_song_details(video_id):
@@ -272,6 +297,8 @@ def get_fallback_meta_from_yt(video_id):
     try:
         ydl_opts = {"quiet": True}
         ydl_opts.setdefault("extractor_args", DEFAULT_YDL_EXTRACTOR_ARGS)
+        if DEFAULT_YDL_JS_RUNTIMES:
+            ydl_opts.setdefault("js_runtimes", DEFAULT_YDL_JS_RUNTIMES)
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(
                 f"https://www.youtube.com/watch?v={video_id}", download=False
@@ -339,6 +366,8 @@ def resolve_title_and_artists(video_id, song_details):
         try:
             tmp_opts = {"quiet": True}
             tmp_opts.setdefault("extractor_args", DEFAULT_YDL_EXTRACTOR_ARGS)
+            if DEFAULT_YDL_JS_RUNTIMES:
+                tmp_opts.setdefault("js_runtimes", DEFAULT_YDL_JS_RUNTIMES)
             with yt_dlp.YoutubeDL(tmp_opts) as ydl:
                 info = ydl.extract_info(
                     f"https://www.youtube.com/watch?v={video_id}", download=False
@@ -434,6 +463,8 @@ def download_audio(video_id, song_info):
         try:
             # prefer extractor args to reduce missing-format warnings when JS runtime isn't present
             ydl_opts.setdefault("extractor_args", DEFAULT_YDL_EXTRACTOR_ARGS)
+            if DEFAULT_YDL_JS_RUNTIMES:
+                ydl_opts.setdefault("js_runtimes", DEFAULT_YDL_JS_RUNTIMES)
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 info = ydl.extract_info(
                     f"https://www.youtube.com/watch?v={video_id}", download=True
@@ -581,6 +612,8 @@ def web_player(video_id):
         # Get audio URL for streaming
         ydl_opts = {"format": "bestaudio/best", "quiet": True}
         ydl_opts.setdefault("extractor_args", DEFAULT_YDL_EXTRACTOR_ARGS)
+        if DEFAULT_YDL_JS_RUNTIMES:
+            ydl_opts.setdefault("js_runtimes", DEFAULT_YDL_JS_RUNTIMES)
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(
                 f"https://www.youtube.com/watch?v={video_id}", download=False
@@ -644,10 +677,11 @@ def psp_download_final(video_id):
         filename = make_filename(title, artists)
         audio_path = CACHE_DIR / filename
 
-        # If file not present, wait a bit for the background worker to finish (poll)
+        # If file not present, wait longer for the background worker to finish (poll)
         if not audio_path.exists():
             waited = 0.0
-            while waited < 5.0:
+            max_wait = 30.0  # Increased from 5.0 to 30.0 seconds
+            while waited < max_wait:
                 if audio_path.exists():
                     break
                 time.sleep(0.2)
@@ -661,7 +695,9 @@ def psp_download_final(video_id):
 
         if not audio_path.exists():
             return render_template(
-                "error.html", message="Download failed. Please try again."
+                "error.html",
+                message="Download failed. Please try again.",
+                video_id=video_id,
             )
 
         file_size = audio_path.stat().st_size // 1024  # Size in KB
@@ -695,6 +731,17 @@ def psp_download_final(video_id):
 def download_file(video_id):
     """Serve the downloaded audio file for download"""
     try:
+        requested_f = request.args.get("f")
+        if requested_f:
+            candidate = CACHE_DIR / Path(requested_f).name
+            if candidate.exists() and candidate.is_file():
+                return send_file(
+                    candidate,
+                    as_attachment=True,
+                    download_name=candidate.name,
+                    mimetype="audio/mpeg",
+                )
+
         song_details = get_song_details(video_id)
 
         title, artists = resolve_title_and_artists(video_id, song_details)
@@ -705,12 +752,16 @@ def download_file(video_id):
             # Fallback to video_id filename
             audio_path = CACHE_DIR / f"{video_id}.mp3"
             if not audio_path.exists():
-                return "File not found", 404
+                candidates = list(CACHE_DIR.glob(f"*{sanitize_filename(title)}*.mp3"))
+                if candidates:
+                    audio_path = candidates[0]
+                else:
+                    return "File not found", 404
 
         return send_file(
             audio_path,
             as_attachment=True,
-            download_name=filename,
+            download_name=audio_path.name,
             mimetype="audio/mpeg",
         )
 
